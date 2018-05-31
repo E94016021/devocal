@@ -105,6 +105,7 @@ if __name__ == "__main__":
                 # get_vocal(d_mix_file, d_bg_file, d_lyric_file, d_out_file)
 
                 # copy file
+                print("file =", str(d_mix_file.split("/Users/LEE/nas/")[1]))
                 copyfile(d_mix_file, local_folder + str(d_mix_file.split("/Users/LEE/nas/")[1]))
                 copyfile(d_bg_file, local_folder + str(d_bg_file.split("/Users/LEE/nas/")[1]))
                 copyfile(d_lyric_file, local_folder + str(d_lyric_file.split("/Users/LEE/nas/")[1]))
