@@ -1,5 +1,5 @@
 import csv
-import librosa
+#import librosa
 import os
 
 from concurrent.futures import ProcessPoolExecutor
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     print("\nstart Loader")
     # l = Loader("female_ios.csv", "/home/cswu/nas/17sing/song", "/home/cswu/nas/17sing/final_music")
     # l = Loader("female_ios.csv", "/Users/LEE/nas/17sing/song", "/Users/LEE/nas/17sing/final_music")
-    l = Loader("male_ios.csv", "/Users/LEE/nas/17sing/song", "/Users/LEE/nas/17sing/final_music")
+    l = Loader("male_ios.csv", "/home/slee/nas/music_grp/17sing/song", "/home/slee/nas/music_grp/17sing/final_music")
 
     print("---Start ProcessPoolExecutor and check missing songs---")
 
