@@ -106,9 +106,9 @@ if __name__ == "__main__":
 
                 # copy file
                 print("file =", d_mix_file.split("/Users/LEE/nas/"))
-                copyfile(d_mix_file, local_folder + str(d_mix_file.split("/Users/LEE/nas/")[1]))
-                copyfile(d_bg_file, local_folder + str(d_bg_file.split("/Users/LEE/nas/")[1]))
-                copyfile(d_lyric_file, local_folder + str(d_lyric_file.split("/Users/LEE/nas/")[1]))
+                copyfile(d_mix_file, local_folder + str(d_mix_file.split("/Users/LEE/nas/")[0]))
+                copyfile(d_bg_file, local_folder + str(d_bg_file.split("/Users/LEE/nas/")[0]))
+                copyfile(d_lyric_file, local_folder + str(d_lyric_file.split("/Users/LEE/nas/")[0]))
                 print("     " + l[i].music_name + " done")
                 # 這裡不能插空白
             except FileNotFoundError:
