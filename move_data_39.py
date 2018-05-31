@@ -98,7 +98,7 @@ if __name__ == "__main__":
             d_bg_file = os.path.join(mp, mi + "-" + mn, mn + ".mp3")
             d_lyric_file = lp
             #d_out_file = os.path.join("/Users/LEE/PycharmProjects/aiLAB/devocal/result",
-                                      l[i].music_id + l[i].music_name + l[i].song_id + ".wav")
+            #                          l[i].music_id + l[i].music_name + l[i].song_id + ".wav")
             print("path done & start devocal")
             try:
                 # get_vocal(mix_file, bg_file, lyric_file, out_file="out.wav")
