@@ -3,7 +3,7 @@ import csv
 import os
 
 from concurrent.futures import ProcessPoolExecutor
-from left1728 import get_vocal
+#from left1728 import get_vocal
 from shutil import copyfile
 
 
