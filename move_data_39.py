@@ -75,7 +75,11 @@ if __name__ == "__main__":
     print("\nstart Loader")
     # l = Loader("female_ios.csv", "/home/cswu/nas/17sing/song", "/home/cswu/nas/17sing/final_music")
     # l = Loader("female_ios.csv", "/Users/LEE/nas/17sing/song", "/Users/LEE/nas/17sing/final_music")
+<<<<<<< HEAD:move_data.py
     l = Loader("male_ios.csv", "/Users/LEE/nas/music_grp/17sing/song", "/Users/LEE/nas/music_grp/17sing/final_music")
+=======
+    l = Loader("male_ios.csv", "/home/slee/nas/music_grp/17sing/song", "/home/slee/nas/music_grp/17sing/final_music")
+>>>>>>> 2cab418a3d9cfe76cc4419fad82e9481566e6082:move_data_39.py
 
     print("---Start ProcessPoolExecutor and check missing songs---")
 
@@ -102,16 +106,22 @@ if __name__ == "__main__":
             d_mix_file = os.path.join(sp, mi + "-" + sn, si + ".mp3")
             d_bg_file = os.path.join(mp, mi + "-" + mn, mn + ".mp3")
             d_lyric_file = lp
+<<<<<<< HEAD:move_data.py
 
             # d_out_file = os.path.join("/Users/LEE/PycharmProjects/aiLAB/devocal/result",
             #                           l[i].music_id + l[i].music_name + l[i].song_id + ".wav")
 
+=======
+            #d_out_file = os.path.join("/Users/LEE/PycharmProjects/aiLAB/devocal/result",
+            #                          l[i].music_id + l[i].music_name + l[i].song_id + ".wav")
+>>>>>>> 2cab418a3d9cfe76cc4419fad82e9481566e6082:move_data_39.py
             print("path done & start devocal")
             try:
                 # get_vocal(mix_file, bg_file, lyric_file, out_file="out.wav")
                 # get_vocal(d_mix_file, d_bg_file, d_lyric_file, d_out_file)
 
                 # copy file
+<<<<<<< HEAD:move_data.py
                 print("dic = ", local_folder + str(d_mix_file.split("/Users/LEE/nas/music_grp/")[1]))
                 print("d_mix_file", d_mix_file)
                 print(".")
@@ -121,6 +131,12 @@ if __name__ == "__main__":
                 print("bg")
                 shutil.copytree(d_lyric_file, local_folder + str(d_lyric_file.split("/Users/LEE/nas/music_grp/")[1]))
                 print("lyric")
+=======
+                print("file =", d_mix_file.split("/home/slee/nas/"))
+                copyfile(d_mix_file, local_folder + str(d_mix_file.split("/home/slee/nas/")[1]))
+                copyfile(d_bg_file, local_folder + str(d_bg_file.split("/home/slee/nas/")[1]))
+                copyfile(d_lyric_file, local_folder + str(d_lyric_file.split("/home/slee/nas/")[1]))
+>>>>>>> 2cab418a3d9cfe76cc4419fad82e9481566e6082:move_data_39.py
                 print("     " + l[i].music_name + " done")
                 # 這裡不能插空白
             except FileNotFoundError:
