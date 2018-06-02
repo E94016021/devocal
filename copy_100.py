@@ -53,9 +53,6 @@ def get_data(s: Song):
         f = open(s.lyric_path, 'r', encoding="utf-8")
         lyric = f.readlines()  # TODO: <-------這個你要自己用lyric Parser讀 如果你要算前奏時間的話
 
-
-
-
     # incase file is missing
     except FileNotFoundError as e:
         print(e)
@@ -66,27 +63,20 @@ def get_data(s: Song):
 
 if __name__ == "__main__":
 
-    # female_ios.csv:   iOS裝置女生唱 照觀看次數排名
-    # male_ios.csv:     iOS裝置男生唱 照觀看次數排名
-
-    # local folder name
-    local_folder = "copy/"
+    finish = 0
 
     print("\nstart Loader")
-    # l = Loader("female_ios.csv", "/home/cswu/nas/17sing/song", "/home/cswu/nas/17sing/final_music")
-    # l = Loader("female_ios.csv", "/Users/LEE/nas/17sing/song", "/Users/LEE/nas/17sing/final_music")
     l = Loader("male_ios.csv", "/Users/LEE/nas/music_grp/17sing/song", "/Users/LEE/nas/music_grp/17sing/final_music")
-
     print("---Start ProcessPoolExecutor and check missing songs---")
 
-    with ProcessPoolExecutor() as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         i = 0
         print("start for-loop and get_data")
         for bg, mix, sr, lyric in executor.map(get_data, l):
             # TODO: do something here
             print("\nfor", i + 1, "times")
 
-            if i >= 100:
+            if finish >= 100:
                 break
 
             lp = l[i].lyric_path
@@ -103,34 +93,56 @@ if __name__ == "__main__":
             d_bg_file = os.path.join(mp, mi + "-" + mn, mn + ".mp3")
             d_lyric_file = lp
 
-            # d_out_file = os.path.join("/Users/LEE/PycharmProjects/aiLAB/devocal/result",
-            #                           l[i].music_id + l[i].music_name + l[i].song_id + ".wav")
+            src_mix_folder = os.path.join(sp, mi + "-" + sn)
+            src_bg_folder = os.path.join(mp, mi + "-" + mn)
+            src_lyric_folder = src_bg_folder
+
+            src_mix_file = d_mix_file
+            src_bg_file = d_bg_file
+            src_lyric_file = d_lyric_file
+
+            dst_mix_folder = "." + src_mix_folder.split("/Users/LEE/nas/music_grp")[1]
+            dst_bg_folder = "." + src_bg_folder.split("/Users/LEE/nas/music_grp")[1]
+            dst_lyric_folder = "." + src_lyric_folder.split("/Users/LEE/nas/music_grp")[1]
+
+            dst_mix_file = os.path.join(dst_mix_folder, si + ".mp3")
+            dst_bg_file = os.path.join(dst_bg_folder, mn + ".mp3")
+            dst_lyric_file = os.path.join(dst_bg_folder, mn + ".lyrc")
 
             print("path done & start devocal")
             try:
-                # get_vocal(mix_file, bg_file, lyric_file, out_file="out.wav")
-                # get_vocal(d_mix_file, d_bg_file, d_lyric_file, d_out_file)
-
-                # copy file
-                print("dic = ", local_folder + str(d_mix_file.split("/Users/LEE/nas/music_grp/")[1]))
-                print("d_mix_file", d_mix_file)
                 print(".")
-                shutil.copytree(d_mix_file, local_folder + str(d_mix_file.split("/Users/LEE/nas/music_grp/")[1]))
-                print("mix")
-                shutil.copytree(d_bg_file, local_folder + str(d_bg_file.split("/Users/LEE/nas/music_grp/")[1]))
-                print("bg")
-                shutil.copytree(d_lyric_file, local_folder + str(d_lyric_file.split("/Users/LEE/nas/music_grp/")[1]))
-                print("lyric")
-                print("     " + l[i].music_name + " done")
+                os.makedirs(dst_mix_folder, mode=0o777, exist_ok=True)
+                os.makedirs(dst_bg_folder, mode=0o777, exist_ok=True)
+                # same as bg
+                # os.makedirs(dst_lyric_folder, exist_ok=True)
+                print("makedir done")
+
+                cmd1 = "cp " + src_mix_file + " " + dst_mix_file
+                os.system(cmd1)
+                print(cmd1)
+
+                cmd2 = "cp " + src_bg_file + " " + dst_bg_file
+                os.system(cmd2)
+                print(cmd2)
+
+                cmd3 = "cp " + src_lyric_file + " " + dst_lyric_file
+                os.system(cmd3)
+                print(cmd3+"\n\n")
+
+                finish += 1
+
                 # 這裡不能插空白
-            except FileNotFoundError:
-                print("! fileNotFoundError !")
+            except FileNotFoundError as e:
+                print(e)
                 pass
-            except FileExistsError:
-                print("! fileExistError !")
+            except FileExistsError as e:
+                print(e)
+                pass
+            except Exception as e:
+                print(e)
                 pass
 
             i += 1
             continue
 
-    # RuntimeWarning: invalid value encountered in sqrt ret = sqrt(sqnorm)
